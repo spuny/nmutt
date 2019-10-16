@@ -1,0 +1,121 @@
+# vim: filetype=neomuttrc
+#About me
+set from = "spunar@vshosting.cz"
+set realname = "Jakub Spunar"
+
+#Credentials
+source "gpg -d ~/dot_conf/nmutt/passwords.gpg |"
+set smtp_url= "smtp://spunar%40vshosting.cz@intcom.vshosting.cz"
+set imap_user = "spunar@vshosting.cz"
+
+#My mailboxes
+set folder = "imaps://intcom.vshosting.cz:993"
+set spoolfile = "+NEVYRIZENE"
+#set spoolfile = "+INBOX"
+mailboxes =NEVYRIZENE
+mailboxes =INBOX
+mailboxes =Archive
+mailboxes =Adam
+mailboxes =Damir
+mailboxes =TECH
+mailboxes =TECH/BACULA =TECH/CENTREON =TECH/CRON =TECH/DAILY_REPORT =TECH/OSTATNI =TECH/RAID =TECH/REPLIKACE =TECH/ROOT =TECH/SMARTDISKU
+
+#Where to put stuff
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+
+#GPG encryption
+set pgp_use_gpg_agent
+set crypt_autosign=yes
+set crypt_verify_sig = yes
+set crypt_replysign = yes
+
+#automatic encryption to specified users
+#send-hook . 'reset crypt_autoencrypt'
+#send-hook "!~l ~t onemail@example\\.org" "set crypt_autoencrypt crypt_autosign"
+#send-hook "!~l ~t another@example\\.org" "set crypt_autoencrypt crypt_autosign"
+
+
+## GnuPG bootstrap
+source ~/.mutt/gpg.rc
+
+
+## ETC
+set mail_check = 30
+set move = no
+set imap_keepalive = 900
+set sort = 'reverse-date'
+set editor = "vim"
+set date_format = "%d.%m.%Y %H:%M"
+# Something to sidebar
+set sidebar_visible
+set sidebar_short_path
+set sidebar_folder_indent
+set sidebar_width = 35
+set sidebar_divider_char = '|'
+set sidebar_indent_string = ' ''
+#set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%S'
+set sidebar_format = "%B %* [%?N?%N / ?%S]"
+set mail_check_stats
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+# Display order
+hdr_order date from to cc subject
+
+## Some colors
+# color234 = grey color
+mono bold bold
+mono underline underline
+mono indicator reverse
+color index white black '.*'
+color index_author red black '.*'
+color index_number blue black 
+color index_subject cyan black '.*'
+color index_size green black 
+color normal default black 
+#color body brightred default "[\-\.*_a-zA-Z-0-9]+@[\-\.a-zA-Z0-9]"
+color body brightblue black "(https?|ftp) ://[\-\.,/%~_:?&=\#a-zA-Z0-9]+"
+#status line
+color status cyan color234
+color sidebar_highlight cyan color234
+color sidebar_indicator white color234 
+#new messages
+color index blue default "~N" # new messages
+
+
+
+## Key bindings
+bind index G last-entry
+bind index g noop
+bind index gg first-entry
+bind index d half-down
+bind index u half-up
+bind index D delete-message
+bind index U undelete-message
+bind index F search
+bind index R group-reply
+macro index ,A "<save-message>=Archive<enter><enter-command>echo 'Saved to archive'<enter>"
+
+# global index and pager shortcuts
+bind index,pager @ compose-to-sender
+bind index,pager R group-reply
+bind index <tab> sync-mailbox
+bind index <space> collapse-thread
+
+#sidebar movement
+bind index,pager \K sidebar-prev # Previous mbox
+bind index,pager \J sidebar-next # Next mbox
+bind index,pager \O sidebar-open # Open mbonx
+
+## Addressbook - mates
+# https://github.com/pimutils/mates.rs
+set query_command= "mates mutt-query '%s'"
+
+# Normally you'd have to hit Ctrl-T for completion.
+# This rebinds it to Tab.
+bind editor <Tab> complete-query
+bind editor ^T    complete
+macro index,pager A \
+    "<pipe-message>mates add | xargs sh -c 'mates edit \"$@\" < /dev/tty || rm -v \"$@\"' mates<enter>" \
+    "add the sender address"
