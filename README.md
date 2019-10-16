@@ -1,2 +1,2 @@
 # nmutt
-Personalized konfiguration
+Personalized configuration
