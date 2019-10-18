@@ -7,6 +7,7 @@ set realname = "Jakub Spunar"
 source "gpg -d ~/dot_conf/nmutt/passwords.gpg |"
 set smtp_url= "smtp://spunar%40vshosting.cz@intcom.vshosting.cz"
 set imap_user = "spunar@vshosting.cz"
+set record = "imaps://intcom.vshosting.cz:993/Sent"
 
 #My mailboxes
 set folder = "imaps://intcom.vshosting.cz:993"
@@ -14,11 +15,13 @@ set spoolfile = "+NEVYRIZENE"
 #set spoolfile = "+INBOX"
 mailboxes =NEVYRIZENE
 mailboxes =INBOX
+mailboxes =Sent
 mailboxes =Archive
 mailboxes =Adam
 mailboxes =Damir
 mailboxes =TECH
 mailboxes =TECH/BACULA =TECH/CENTREON =TECH/CRON =TECH/DAILY_REPORT =TECH/OSTATNI =TECH/RAID =TECH/REPLIKACE =TECH/ROOT =TECH/SMARTDISKU
+
 
 #Where to put stuff
 set header_cache = "~/.mutt/cache/headers"
@@ -54,7 +57,7 @@ set sidebar_short_path
 set sidebar_folder_indent
 set sidebar_width = 35
 set sidebar_divider_char = '|'
-set sidebar_indent_string = ' ''
+set sidebar_indent_string = ' |_'
 #set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%S'
 set sidebar_format = "%B %* [%?N?%N / ?%S]"
 set mail_check_stats
