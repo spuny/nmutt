@@ -19,6 +19,7 @@ mailboxes =Sent
 mailboxes =Archive
 mailboxes =Adam
 mailboxes =Damir
+mailboxes =Deleted
 mailboxes =TECH
 mailboxes =TECH/BACULA =TECH/CENTREON =TECH/CRON =TECH/DAILY_REPORT =TECH/OSTATNI =TECH/RAID =TECH/REPLIKACE =TECH/ROOT =TECH/SMARTDISKU
 
@@ -65,6 +66,9 @@ auto_view text/html
 alternative_order text/plain text/enriched text/html
 # Display order
 hdr_order date from to cc subject
+# Notifications
+set new_mail_command="notify-send --icon='/home/sniffer/Pictures/neomutt.png' \
+'New Email' '%n new messages, %u unread.' &"
 
 ## Some colors
 # color234 = grey color
@@ -99,6 +103,7 @@ bind index U undelete-message
 bind index F search
 bind index R group-reply
 macro index ,A "<save-message>=Archive<enter><enter-command>echo 'Saved to archive'<enter>"
+macro index \Ca "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all new as read"
 
 # global index and pager shortcuts
 bind index,pager @ compose-to-sender
