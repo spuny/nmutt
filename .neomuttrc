@@ -76,7 +76,7 @@ mono bold bold
 mono underline underline
 mono indicator reverse
 color index white black '.*'
-color index_author red black '.*'
+color index_author color63 black '.*'
 color index_number blue black 
 color index_subject cyan black '.*'
 color index_size green black 
@@ -102,7 +102,7 @@ bind index D delete-message
 bind index U undelete-message
 bind index F search
 bind index R group-reply
-macro index ,A "<save-message>=Archive<enter><enter-command>echo 'Saved to archive'<enter>"
+macro index A "<save-message>=Archive<enter><enter-command>echo 'Saved to archive'<enter>"
 macro index \Ca "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all new as read"
 
 # global index and pager shortcuts
@@ -124,6 +124,6 @@ set query_command= "mates mutt-query '%s'"
 # This rebinds it to Tab.
 bind editor <Tab> complete-query
 bind editor ^T    complete
-macro index,pager A \
+macro index,pager ,A \
     "<pipe-message>mates add | xargs sh -c 'mates edit \"$@\" < /dev/tty || rm -v \"$@\"' mates<enter>" \
     "add the sender address"
