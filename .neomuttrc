@@ -1,27 +1,22 @@
 # vim: filetype=neomuttrc
 #About me
-set from = "spunar@vshosting.cz"
-set realname = "Jakub Spunar"
+set from = "sniffer@sniffer.cz"
+set realname = "Sniffer"
 
 #Credentials
-source "gpg -d ~/dot_conf/nmutt/passwords.gpg |"
-set smtp_url= "smtp://spunar%40vshosting.cz@intcom.vshosting.cz"
-set imap_user = "spunar@vshosting.cz"
-set record = "imaps://intcom.vshosting.cz:993/Sent"
+source "gpg -d ~/.config/mutt_pass/password.gpg |"
+set smtp_url= "smtp://sniffer@mail.sniffer.cz"
+set imap_user = "sniffer"
+set record = "imaps://mail.sniffer.cz:993/Sent"
 
 #My mailboxes
-set folder = "imaps://intcom.vshosting.cz:993"
-set spoolfile = "+NEVYRIZENE"
-#set spoolfile = "+INBOX"
-mailboxes =NEVYRIZENE
+set folder = "imaps://mail.sniffer.cz:993"
+#set spoolfile = "+NEVYRIZENE"
+set spoolfile = "+INBOX"
 mailboxes =INBOX
 mailboxes =Sent
 mailboxes =Archive
-mailboxes =Adam
-mailboxes =Damir
 mailboxes =Deleted
-mailboxes =TECH
-mailboxes =TECH/BACULA =TECH/CENTREON =TECH/CRON =TECH/DAILY_REPORT =TECH/OSTATNI =TECH/RAID =TECH/REPLIKACE =TECH/ROOT =TECH/SMARTDISKU
 
 
 #Where to put stuff
@@ -42,7 +37,7 @@ set crypt_replysign = yes
 
 
 ## GnuPG bootstrap
-source ~/.mutt/gpg.rc
+#source ~/.mutt/gpg.rc
 
 
 ## ETC
@@ -67,7 +62,7 @@ alternative_order text/plain text/enriched text/html
 # Display order
 hdr_order date from to cc subject
 # Notifications
-set new_mail_command="notify-send --icon='/home/sniffer/Pictures/neomutt.png' \
+#set new_mail_command="notify-send --icon='/home/sniffer/Pictures/neomutt.png' \
 'New Email' '%n new messages, %u unread.' &"
 
 ## Some colors
